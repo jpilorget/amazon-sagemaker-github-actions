@@ -1,7 +1,8 @@
-# SageMaker End2End CI/CD pipeline
-A CI/CD pipeline with SageMaker and Github that helps you to collaborate on a Machine Learning project from training to deployment.
+# Building a CI/CD pipeline with GitHub Actions
+## Overview
+Learn how to build an end to end CI/CD pipeline for Amazon SageMaker -including container image creation, model training and deployment- using GitHub Actions. This project allows you to customise the steps for model creation and approval, as well as provides automated information on the status.
 
 ## Usage
-For a demo of this project see my blog post:
-
-https://medium.com/@haythemtellili/machine-learning-ci-cd-pipeline-with-github-actions-and-amazon-sagemaker-f99818b7506a
+TBD
+- Create Repository / Environment Secrets.
+- Grant permissions for message creation on GitHub.
