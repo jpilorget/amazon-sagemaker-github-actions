@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
 import os
-
 from sagemaker.estimator import Estimator
 import pandas as pd
 import boto3
