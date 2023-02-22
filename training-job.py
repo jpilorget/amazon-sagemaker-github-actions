@@ -14,13 +14,18 @@ session = sagemaker.Session(boto3.session.Session())
 BUCKET_NAME = os.environ['BUCKET_NAME']
 PREFIX = os.environ['PREFIX']
 REGION = os.environ['AWS_DEFAULT_REGION']
+ECR_REPOSITORY = os.environ['AWS_DEFAULT_REGION']
+ECR_REPO_NAME = os.environ['ECR_REPO_NAME']
+
 # Replace with your IAM role arn that has enough access (e.g. SageMakerFullAccess)
 IAM_ROLE_NAME = os.environ['IAM_ROLE_NAME']
 GITHUB_SHA = os.environ['GITHUB_SHA']
 ACCOUNT_ID = session.boto_session.client(
     'sts').get_caller_identity()['Account']
+
 # Replace with your desired training instance
 training_instance = 'ml.m5.large'
+
 
 # Replace with your data s3 path
 training_data_s3_uri = 's3://{}/{}/boston-housing-training.csv'.format(
@@ -36,7 +41,7 @@ base_job_name = 'boston-housing-model'
 
 # Define estimator object
 boston_estimator = Estimator(
-    image_uri=f'{ACCOUNT_ID}.dkr.ecr.{REGION}.amazonaws.com/github-actions-test:latest',
+    image_uri=f'{ACCOUNT_ID}.dkr.ecr.{REGION}.amazonaws.com/{ECR_REPO_NAME}:latest',
     role=IAM_ROLE_NAME ,
     instance_count=1,
     instance_type=training_instance,
@@ -51,7 +56,7 @@ boston_estimator = Estimator(
              "REGION": REGION,},
 
     tags=[{"Key": "email",
-           "Value": "haythemaws@gmail.com"}])
+           "Value": "jpilorget@gmail.com"}])
 
 boston_estimator.fit({'training': training_data_s3_uri,
                       'validation': validation_data_s3_uri}, wait=False)
