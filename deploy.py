@@ -9,10 +9,10 @@ import botocore
 
 # Replace with your desired configuration
 initial_instance_count = 1
-endpoint_instance_type = 'ml.m5.large'
+endpoint_instance_type = 'ml.m6g.large'
 
-BUCKET_NAME = 'gh-actions-test-bucket'
-PREFIX = 'boston-housing-regression'
+BUCKET_NAME = os.environ['BUCKET_NAME']
+PREFIX = os.environ['PREFIX']
 OBJECT_KEY = f'{PREFIX}/reports.csv'
 
 s3 = boto3.resource('s3')
