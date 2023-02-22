@@ -1,4 +1,4 @@
-name: deploy_endpoint
+name: Deploy Pipeline
 on:
   push:
     branches: [ main ]
@@ -8,8 +8,8 @@ jobs:
     container: docker://dvcorg/cml-py3:latest
     steps:
     - uses: actions/checkout@v2
-    - name: Fire SageMaker
-      id: sm_train
+    - name: Deploy SageMaker Endpoint 
+      id: sm_deploy
       env:
         IAM_ROLE_NAME: ${{ secrets.IAM_ROLE_NAME }}
         AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}

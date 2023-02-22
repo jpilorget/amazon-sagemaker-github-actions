@@ -9,7 +9,7 @@ import botocore
 
 # Replace with your desired configuration
 initial_instance_count = 1
-endpoint_instance_type = 'ml.m6g.large'
+endpoint_instance_type = 'ml.t2.medium'
 
 BUCKET_NAME = os.environ['BUCKET_NAME']
 PREFIX = os.environ['PREFIX']
@@ -33,8 +33,6 @@ except botocore.exceptions.ClientError as e:
 reports_df['date_time'] = pd.to_datetime(reports_df['date_time'], format='%Y-%m-%d %H:%M:%S')
 latest_training_job_name = reports_df.sort_values(['date_time'], ascending=False).training_job_name.values[0]
 attached_estimator = Estimator.attach(latest_training_job_name)
-
-
 
 attached_predictor = attached_estimator.deploy(initial_instance_count=initial_instance_count,
                                                instance_type=endpoint_instance_type,
